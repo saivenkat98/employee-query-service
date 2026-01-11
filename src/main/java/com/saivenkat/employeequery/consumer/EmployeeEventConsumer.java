@@ -5,6 +5,9 @@ import com.saivenkat.employeequery.model.EmployeeView;
 import com.saivenkat.employeequery.repo.EmployeeViewRepository;
 
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+
 import org.springframework.kafka.annotation.KafkaListener;
 
 @Component
@@ -18,6 +21,7 @@ public class EmployeeEventConsumer {
 
     @KafkaListener(topics="employee.events")
     public void onEmployeeCreated(EmployeeCreatedEvent event) {
+        Instant createdAt = Instant.ofEpochMilli(event.occurredAtEpochMs());
 
         //project event to EmployeeView
         EmployeeView employeeView = new EmployeeView(
@@ -25,7 +29,7 @@ public class EmployeeEventConsumer {
             event.name(),
             event.email(),
             event.department(),
-            event.occurredAt()
+            createdAt
         );
 
         repo.save(employeeView);
