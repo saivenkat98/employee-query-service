@@ -1,6 +1,7 @@
 package com.saivenkat.employeequery.consumer;
 
-import com.saivenkat.employeequery.events.EmployeeCreatedEvent;
+// import com.saivenkat.employeequery.events.EmployeeCreatedEvent;
+import com.saivenkat.employee.contracts.events.EmployeeCreatedEvent;
 import com.saivenkat.employeequery.model.EmployeeView;
 import com.saivenkat.employeequery.repo.EmployeeViewRepository;
 
